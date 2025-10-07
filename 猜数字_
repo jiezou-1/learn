@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int secret_number, guess, attempts = 0, max_attempts = 7;
+    char play_again;
+
+    printf("=== 欢迎来到猜数字游戏 ===\n");
+
+    do {
+        // 生成随机数 (1-100)
+        srand(time(0));
+        secret_number = rand() % 100 + 1;
+        attempts = 0;
+
+        printf("\n我已经想好了一个1到100之间的数字，你有%d次机会猜中它！\n", max_attempts);
+
+        while (attempts < max_attempts) {
+            printf("请输入你的猜测 (剩余次数: %d): ", max_attempts - attempts);
+            scanf("%d", &guess);
+            attempts++;
+
+            if (guess == secret_number) {
+                printf("🎉 恭喜你！猜对了！数字就是 %d\n", secret_number);
+                printf("你用了 %d 次机会猜中了！\n", attempts);
+                break;
+            }
+            else if (guess < secret_number) {
+                printf("太小了！再试试更大的数字。\n");
+            }
+            else {
+                printf("太大了！再试试更小的数字。\n");
+            }
+
+            if (attempts == max_attempts) {
+                printf("😔 很遗憾，你没有猜中！正确答案是 %d\n", secret_number);
+            }
+        }
+
+        printf("\n是否再玩一次？(y/n): ");
+        scanf(" %c", &play_again);
+
+    } while (play_again == 'y' || play_again == 'Y');
+
+    printf("感谢游戏！再见！\n");
+
+    return 0;
+}
+
+
+
